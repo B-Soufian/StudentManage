@@ -30,40 +30,40 @@
                 <div class="row g-3 mb-4 align-items-end">
                     <div class="col-md-3">
                         <label for="" class="form-label">Étudiant</label>
-                        <select id="" class="form-select">
-                            <option selected>Tous</option>
-                            <option>Sara ALAOUI</option>
-                            <option>Yassine BENNANI</option>
-                            <option>Nadia CHERKAOUI</option>
+                        <select iid="etudient" name="etudient" class="form-select">
+                            <option selected>Toutes</option>
+                            <?php foreach ($tabEtudiants as $Etudiant ): ?>
+                                <option value="<?php echo $Etudiant->NEtudiant ?>">
+                                    <?php echo $Etudiant->Nom ,' ' , $Etudiant->Prenom ?>
+                                </option>
+                            <?php endforeach?>
                         </select>
                     </div>
                     <div class="col-md-3">
                         <label for="" class="form-label">Matière</label>
-                        <select id="" class="form-select">
+                        <select id="matier" name="matier" class="form-select">
                             <option selected>Toutes</option>
-                            <option>Laravel</option>
-                            <option>Algèbre</option>
-                            <option>BD Avancées</option>
+                            <?php foreach ($tabMatiers as $Matier ): ?>
+                                <option value="<?php echo $Matier->CodeMat ?>">
+                                    <?php echo $Matier->LibelleMat ?>
+                                </option>
+                            <?php endforeach?>
                         </select>
                     </div>
                     <div class="col-md-2">
                         <label for="" class="form-label">Du</label>
                         <div class="input-group">
-                             <input type="text" id="" class="form-control" value="01/10/2025">
-                             <span class="input-group-text bg-white"><i class="fas fa-calendar-alt"></i></span>
+                             <input type="date" id="" class="form-control">
                         </div>
                     </div>
                     <div class="col-md-2">
                         <label for="dateTo" class="form-label">Au</label>
-                         <div class="input-group">
-                            <input type="text" id="dateTo" class="form-control" value="31/10/2025">
-                            <span class="input-group-text bg-white"><i class="fas fa-calendar-alt"></i></span>
-                        </div>
+                        <input type="date" id="dateTo" class="form-control" >
                     </div>
                 
                     <div>
-                        <button class="btn btn-primary">
-                            <i class="fas fa-plus-circle me-1"></i> Nouvelle évaluation
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addStudentModal">
+                            <i class="fas fa-plus-circle me-1"></i> Nouvel étudiant
                         </button>
                     </div>
                 </div>
@@ -87,10 +87,10 @@
                                     <td><?php echo $Evaluation->Nom ,' ' , $Evaluation->Prenom ?></td>
                                     <td><?php echo htmlspecialchars($Evaluation->LibelleMat) ?></td>
                                     <td> <span class="badge badge-coeff"><?php echo htmlspecialchars($Evaluation->CoeffMat) ?></span></td>
-                                    <td><span class="badge bg-success"><?php echo htmlspecialchars($Evaluation->MoyennePonderee) ?></span></td>
+                                    <td><span class="badge bg-success"><?php echo htmlspecialchars($Evaluation->Note) ?></span></td>
                                     <td>
                                         <button class="btn btn-outline-secondary"><i class="fas fa-pencil-alt"></i></button>
-                                        <button class="btn btn-outline-danger"><i class="fas fa-trash"></i></button>
+                                        <a href="index.php?page=evaluations&action=delete&idE=<?= $Evaluation->NEtudiant?>&idM=<?= $Evaluation->CodeMat?> " class="btn btn-outline-danger"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
                             <?php endforeach ; ?>
@@ -113,6 +113,58 @@
                     </nav>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addStudentModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <form action="index.php?page=evaluations&action=store" method="post" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Nouvelle Evaluation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3 row">
+                        <div class="col-md-6">
+                            <label for="" class="form-label">Etudient</label>
+                            <select iid="etudient" name="etudient" class="form-select">
+                                <option selected>Tous</option>
+                                <?php foreach ($tabEtudiants as $Etudiant ): ?>
+                                    <option value="<?php echo $Etudiant->NEtudiant ?>">
+                                        <?php echo $Etudiant->Nom ,' ' , $Etudiant->Prenom ?>
+                                    </option>
+                                <?php endforeach?>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="" class="form-label">Matier</label>
+                            <select id="matier" name="matier" class="form-select">
+                                <option selected>Tous</option>
+                                <?php foreach ($tabMatiers as $Matier ): ?>
+                                    <option value="<?php echo $Matier->CodeMat ?>">
+                                        <?php echo $Matier->LibelleMat ?>
+                                    </option>
+                                <?php endforeach?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-md-6">
+                            <label for="" class="form-label">Date</label>
+                            <input type="date" name="date" id="date" class="form-control" required>
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label for="" class="form-label">Note</label>
+                            <input name="note" id="note" class="form-control" required>
+                            <span class="text-muted">value entre 0 et 20</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                </div>
+            </form>
         </div>
     </div>
 

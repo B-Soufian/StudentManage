@@ -31,11 +31,27 @@ switch ($page) {
 
     case 'matieres':
         $controller = new MatiereCon();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST'  && $action === 'store') {
+            $controller->store();
+            exit;
+        }
+        if ($action === 'delete') {
+            $controller->delete($_GET['id']);
+            exit;
+        }
         $controller->index();
         break;
 
     case 'evaluations':
         $controller = new EvaluationsCon();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST'  && $action === 'store') {
+            $controller->store();
+            exit;
+        }
+        if ($action === 'delete') {
+            $controller->delete($_GET['idE'],$_GET['idM']);
+            exit;
+        }
         $controller->index();
         break;
 

@@ -29,7 +29,7 @@ class EtudiantMod{
         ]);
         return $conn->lastInsertId();
     }
-    public static function delete(int $id): bool {
+    public static function delete(int $id){
         global $conn;
         try {
             $conn->beginTransaction();
