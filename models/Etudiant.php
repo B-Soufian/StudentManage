@@ -4,7 +4,6 @@ class EtudiantMod{
     public $prenom;
     public static function getAllEtudiants(){
         global $conn;
-        $req = 'SELECT * FROM etudiant';
         $req = 'SELECT 
                 e.NEtudiant,
                 ev.Note,
@@ -14,7 +13,7 @@ class EtudiantMod{
                 FROM ETUDIANT e
                 JOIN EVALUER ev ON e.NEtudiant = ev.NEtudiant
                 JOIN MATIERE m ON ev.CodeMat = m.CodeMat
-                GROUP BY e.NEtudiant, e.Nom, e.Prenom ,ev.Note';
+                GROUP BY e.NEtudiant, e.Nom, e.Prenom';
         $sel = $conn->prepare($req);
         $sel->execute();
         $TabEtudiant = $sel->fetchAll(PDO::FETCH_OBJ);

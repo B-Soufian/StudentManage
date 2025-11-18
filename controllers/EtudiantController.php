@@ -1,7 +1,7 @@
 <?php
 class EtudiantCont {
 
-    function list() {
+    function index() {
         $tabEtudiants = EtudiantMod::getAllEtudiants();
         include 'views/etudiants/list.php';
     }
