@@ -22,7 +22,8 @@
 </head>
 <body>
 
-    <?php include 'views/navbar/nav.php' ?>
+    <?php include 'views/navbar/nav.php' ; 
+    ?>
 
     <div class="container p-4">
         <div class="card main-card shadow-sm">
@@ -36,7 +37,7 @@
                         <button class="btn btn-outline-secondary me-2">
                             <i class="fas fa-filter me-1"></i> Filtres
                         </button>
-                        <button class="btn btn-primary">
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addStudentModal">
                             <i class="fas fa-plus-circle me-1"></i> Nouvel étudiant
                         </button>
                     </div>
@@ -65,7 +66,7 @@
                                 <td>
                                     <button class="btn btn-outline-primary"><i class="fas fa-eye"></i></button>
                                     <button class="btn btn-outline-secondary"><i class="fas fa-pencil-alt"></i></button>
-                                    <button class="btn btn-outline-danger"><i class="fas fa-trash"></i></button>
+                                    <a class="btn btn-outline-danger" href="index.php?page=etudiants&action=delete&id=<?= $Etudiant->NEtudiant ?>"><i class="fas fa-trash"></i></a>
                                 </td>
                             </tr>
                         <?php endforeach ?>
@@ -89,6 +90,31 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="modal fade" id="addStudentModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="index.php?page=etudiants&action=store" method="post" class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Ajouter un étudiant</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                <label for="nom" class="form-label">Nom</label>
+                <input name="nom" id="nom" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                <label for="prenom" class="form-label">Prénom</label>
+                <input name="prenom" id="prenom" class="form-control" required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn btn-primary">Ajouter</button>
+            </div>
+        </form>
+    </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
