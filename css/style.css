@@ -1,0 +1,25 @@
+#dashbord {
+    background-color: #f8f9fa;
+}
+.icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    background-color: #e0e7ff; color: #4338ca;
+}
+.card {
+    border: none !important;
+    border-radius: 0.75rem !important;
+}
+
+.badge-coeff {
+    background-color: #fee2e2 !important;
+    color: #dc2626 !important;
+    padding: 0.4em 0.6em !important;
+    font-weight: 600 !important;
+}
