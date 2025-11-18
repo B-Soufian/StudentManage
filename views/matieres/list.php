@@ -78,17 +78,19 @@
                             </tr>
                         </thead>
                         <tbody>
+                        <?php foreach ($tabMatiers as $Matiers): ?>
                             <tr>
-                                <th scope="row">1</th>
-                                <td>Laravel</td>
-                                <td><span class="badge badge-coeff" >3</span></td>
-                                <td><span class="badge bg-success">16.8</span></td>
+                                <th scope="row"><?php echo htmlspecialchars($Matiers->CodeMat) ?></th>
+                                <td><?php echo htmlspecialchars($Matiers->LibelleMat) ?></td>
+                                <td><span class="badge badge-coeff" ><?php echo htmlspecialchars($Matiers->CoeffMat) ?></span></td>
+                                <td><span class="badge bg-success"><?php echo htmlspecialchars($Matiers->MoyenneMatiere) ?></span></td>
                                 <td>
                                     <button class="btn btn-outline-primary"><i class="fas fa-eye"></i></button>
                                     <button class="btn btn-outline-secondary"><i class="fas fa-pencil-alt"></i></button>
                                     <button class="btn btn-outline-danger"><i class="fas fa-trash"></i></button>
                                 </td>
                             </tr>
+                        <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>

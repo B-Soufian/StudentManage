@@ -106,17 +106,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">05/10/2025</th>
-                                <td>Sara Alaoui</td>
-                                <td>Laravel</td>
-                                <td> <span class="badge badge-coeff">3</span></td>
-                                <td><span class="badge bg-success">16.8</span></td>
-                                <td>
-                                    <button class="btn btn-outline-secondary"><i class="fas fa-pencil-alt"></i></button>
-                                    <button class="btn btn-outline-danger"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
+                            <?php foreach ($tabEvaluation as $Evaluation ): ?>
+                                <tr>
+                                    <th scope="row"><?php echo htmlspecialchars($Evaluation->Date) ?></th>
+                                    <td><?php echo $Evaluation->Nom ,' ' , $Evaluation->Prenom ?></td>
+                                    <td><?php echo htmlspecialchars($Evaluation->LibelleMat) ?></td>
+                                    <td> <span class="badge badge-coeff"><?php echo htmlspecialchars($Evaluation->CoeffMat) ?></span></td>
+                                    <td><span class="badge bg-success"><?php echo htmlspecialchars($Evaluation->MoyennePonderee) ?></span></td>
+                                    <td>
+                                        <button class="btn btn-outline-secondary"><i class="fas fa-pencil-alt"></i></button>
+                                        <button class="btn btn-outline-danger"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            <?php endforeach ; ?>
                         </tbody>
                     </table>
                 </div>
